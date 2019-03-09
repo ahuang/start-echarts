@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="./lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;border: 1px solid #ccc;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        function show2num(num) {
+            return num < 10 ? `0${num}` : `${num}`;
+        }
+
+        function timeStampToTimeStr(timeStamp) {
+            let timeDate = new Date(timeStamp);
+            let YY = timeDate.getFullYear();
+            let MM = timeDate.getMonth();
+            let DD = timeDate.getDate();
+            let HH = timeDate.getHours();
+            let mm = timeDate.getMinutes();
+            let ss = timeDate.getSeconds();
+            MM += 1;
+            return `${YY}-${show2num(MM)}-${show2num(DD)} ${show2num(HH)}:${show2num(mm)}:${show2num(ss)}`;
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                backgroundColor: 'rgba(255,255,255,0.7)',
+                borderColor: 'rgb(124, 181, 236)',
+                borderRadius: 8,
+                borderWidth: 1,
+                textStyle: {
+                    color: '#000'
+                },
+                padding: 10,
+                formatter: function (params) {
+                    console.log(params);
+                    let xValue = timeStampToTimeStr(params[0].axisValue) + '<br/>';
+                    let data = [xValue];
+                    params.forEach((item) => {
+                        data.push(`${item.seriesName}: ${item.value[1]}<br/>`);
+                    });
+                    return data.join('');
+                }
+            },
+            xAxis: {
+                type: 'time',
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '温度',
+                data: [
+                    [1525698119000, 100],
+                    [1525698120000, 80],
+                    [1525698121000, 50],
+                    [1525698122000, 88],
+                    [1525698123000, 180],
+                    [1525698124000, 150]
+                ],
+                type: 'line',
+                smooth: true
+            }, {
+                name: '湿度',
+                data: [
+                    [1525698119000, 30],
+                    [1525698120000, 155],
+                    [1525698121000, 77],
+                    [1525698122000, 88],
+                    [1525698123000, 80],
+                    [1525698124000, 10]
+                ],
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
