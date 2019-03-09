@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="./lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;border: 1px solid #ccc;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        option = {
+            grid: {
+                x: '100px',
+                y: '110px',
+                x2: '120px',
+                y2: '130px'
+            },
+            xAxis: {
+                type: 'time',
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [
+                    [1525698119000, 100],
+                    [1525698120000, 80],
+                    [1525698121000, 50],
+                    [1525698122000, 88],
+                    [1525698123000, 180],
+                    [1525698124000, 150]
+                ],
+                type: 'line',
+                smooth: true
+            }, {
+                data: [
+                    [1525698119000, 30],
+                    [1525698120000, 155],
+                    [1525698121000, 77],
+                    [1525698122000, 88],
+                    [1525698123000, 80],
+                    [1525698124000, 10]
+                ],
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
