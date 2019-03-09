@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script src="./lib/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        option = {
+            grid: {
+                x: 100,
+                y: 100,
+                x2: 100,
+                y2: 100
+            },
+            xAxis: {
+                type: "time",
+            },
+            yAxis: [{
+                name: '温度',
+                nameLocation: 'middle',
+                nameGap: 55,
+                type: 'value'
+            }, {
+                name: '湿度',
+                nameLocation: 'middle',
+                nameGap: 55,
+                type: 'value'
+            }],
+            series: [{
+                yAxisIndex: 0,
+                data: [
+                    [1525698119000, 1000],
+                    [1525698120000, 800],
+                    [1525698121000, 500],
+                    [1525698122000, 880],
+                    [1525698123000, 1800],
+                    [1525698124000, 1500]
+                ],
+                type: 'line',
+                smooth: true
+            }, {
+                yAxisIndex: 1,
+                data: [
+                    [1525698119000, 3],
+                    [1525698120000, 1],
+                    [1525698121000, 7],
+                    [1525698122000, 8],
+                    [1525698123000, 8],
+                    [1525698124000, 1]
+                ],
+                type: 'line',
+                smooth: true
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
